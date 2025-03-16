@@ -7,12 +7,10 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
     "sourceMap": true,
-    "types": ["vite/client"],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },

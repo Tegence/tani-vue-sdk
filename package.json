@@ -7,15 +7,12 @@
   "module": "dist/tani-sdk.esm.js",
   "types": "dist/tani-sdk.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "vite build",
     "dev": "vite",
     "lint": "eslint . --ext .js,.ts,.vue",
     "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
-  },
-  "dependencies": {
-    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",
@@ -28,13 +25,17 @@
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
+    "rollup": "^4.35.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-import-css": "^3.5.8",
+    "rollup-plugin-vue": "^6.0.0",
     "storybook": "^8.6.4",
     "tailwindcss": "^3.4.1",
     "tslib": "^2.6.2",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.3",
+    "vue": "^3.5.13",
     "vue-tsc": "^2.2.4"
   },
   "files": [
@@ -43,5 +44,11 @@
   "peerDependencies": {
     "vue": "^3.5.13"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.8.3",
+    "browser-image-compression": "^2.0.2",
+    "lucide-vue-next": "^0.482.0",
+    "vue": "^3.5.13"
+  }
 }

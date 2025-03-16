@@ -1,9 +1,10 @@
-import vue from '@vitejs/plugin-vue';
+import vue from 'rollup-plugin-vue'; 
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import css from 'rollup-plugin-import-css';
+
 
 export default [
   {
@@ -21,11 +22,11 @@ export default [
       },
     ],
     plugins: [
-        vue(), 
-        resolve({ extensions: [".mjs", ".js", ".ts", ".json", ".vue"] }), 
-        commonjs(), 
-        typescript({ tsconfig: "./tsconfig.json" }), 
-        css()
+      vue({ preprocessStyles: true, css: true }), 
+      resolve({ extensions: [".mjs", ".js", ".ts", ".json", ".vue"] }), 
+      commonjs(), 
+      typescript({ tsconfig: './tsconfig.json' }), 
+      css()
     ],
     external: ['vue'],
   },
