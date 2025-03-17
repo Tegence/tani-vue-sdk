@@ -94,9 +94,6 @@ export default {
             formData.append('group_id', group_id);
           }
           formData.append('image', imageFile.value);
-          console.log(group_id)
-          console.log(inputName.value)
-          console.log(imageFile.value)
 
           const response = await axios.post('/persons/create-with-image', formData, {
             headers: props.authInstance.getHeaders(),
@@ -114,13 +111,11 @@ export default {
     };
 
     const closeDialog = () => {
-      console.log("Closing dialog...");
       openDialog.value = false;
       closeCamera();
     };
 
     const closeCamera = () => {
-      console.log("Closing camera...");
 
       if (!webCamRef.value) {
         console.warn("webCamRef is not set yet.");

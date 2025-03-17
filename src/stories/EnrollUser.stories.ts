@@ -9,7 +9,7 @@ const meta: Meta<typeof EnrollUser> = {
   component: EnrollUser,
   argTypes: {
     authInstance: { control: 'object' }, // Mocking an object instance
-    handleSuccess: { action: 'handleSuccess' }, // Logs when the function is called
+    onSuccess: { action: 'handleSuccess' }, // Logs when the function is called
   },
 };
 
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof EnrollUser>;
 export const Default: Story = {
   args: {
     authInstance,
-    handleSuccess: (data: any) => console.log('Success callback:', data),
+    onSuccess: (data: any) => console.log('Success callback:', data),
   },
 };
 

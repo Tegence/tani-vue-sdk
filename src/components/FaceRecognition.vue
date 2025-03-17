@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import WebCamComponent from "./utils/Webcam.vue";
+import Webcam from "./utils/Webcam.vue";
 import Dialog from "./utils/Dialog.vue";
 import axios from "./api/useAxios";
 import { FaceRecognitionResult } from "../types/FaceRecognitionResult";
@@ -52,13 +52,11 @@ const identifyUserFace = async () => {
 };
 
 const closeDialog = () => {
-    console.log("Closing dialog...");
     openDialog.value = false;
     closeCamera();
 };
 
 const closeCamera = () => {
-    console.log("Closing camera...");
 
     if (!webCamRef.value) {
     console.warn("webCamRef is not set yet.");
@@ -82,7 +80,7 @@ const closeCamera = () => {
   <main class="flex w-full flex-col bg-gray-100 p-8 relative">
     <h1 class="font-bold text-4xl text-center">Face Search</h1>
     <div class="w-fit mx-auto mt-6">
-      <WebCamComponent
+      <Webcam
         ref="webCamRef"
         :setImageFile="(file: File) => (imageFile = file)"
         :setImageSrc="(src: string) => (imageSrc = src)"

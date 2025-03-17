@@ -60,7 +60,6 @@ const compareImages = async () => {
 };
 
 const closeDialog = () => {
-    console.log("Closing dialog...");
     openDialog.value = false;
     closeCamera();
 }

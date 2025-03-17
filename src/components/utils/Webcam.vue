@@ -81,7 +81,6 @@
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 if (video.value) {
                     video.value.srcObject = stream;
-                    console.log("Camera opened successfully.");
                 } else {
                     console.error("Video element is not found.");
                 }
@@ -113,7 +112,6 @@
             props.setImageSrc(imageData); // Update parent component
             props.setImageFile(convertBase64StringToFile(imageData, `captured-${Date.now()}.jpg`));
 
-            console.log("Image captured successfully.");
         };
 
   
@@ -124,7 +122,6 @@
           }
           imageSrc.value = null
           props.setImageSrc(null);
-          console.log("Camera closed.");
         };
   
         const openFileDialog = (event) => {
@@ -148,7 +145,6 @@
                 props.setImageFile(convertedFile);
                 props.setImageSrc(imageUrl); // Update parent component
 
-                console.log("File uploaded successfully:", convertedFile);
             } catch (error) {
                 console.error("Error processing file upload:", error);
             }
