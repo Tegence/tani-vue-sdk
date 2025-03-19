@@ -10,7 +10,7 @@
             <div class="h-full w-full flex justify-center items-center relative">
                 <div 
                     :class="[
-                        'relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center rounded-full border-8 border-[#D3D3D3]',
+                        'relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center rounded-full rotate-45 border-8',
                         progressValue
                     ]"
                 >
@@ -18,7 +18,7 @@
                         ref="videoRef"
                         autoplay
                         playsinline
-                        class="w-full h-full object-cover rounded-full"
+                        class="w-full h-full object-cover -rotate-45 rounded-full"
                     />
                 </div>
             </div>
@@ -72,10 +72,10 @@
 
     const progressValue = computed(() => {
     switch (instructions.value) {
-        case 'Please open your mouth': return 'border-t-[#4327B2]';
-        case 'Please move your head': return 'border-l-[#4327B2]';
-        case 'Liveness detection completed!': return 'border-[#4327B2]';
-        default: return 0;
+        case 'Please open your mouth 3 times': return 'border-t-[#4327B2]';
+        case 'Please move your head 3 times': return 'border-r-[#4327B2] border-t-[#4327B2]';
+        case 'Liveness detection completed!': return ' border-[#4327B2]';
+        default: return 'border-gray-300';
     }
     });
 
