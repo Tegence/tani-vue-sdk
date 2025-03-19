@@ -103,11 +103,11 @@
         if (message.results) {
         instructions.value = 'Liveness detection completed!';
         props.setResult(message.results);
-        props.onSuccess(message.results);
         socketRef.value?.close();
         props.setOpenDialog(true);
         props.setMessage('Liveness detection completed!');
         displayCamera.value = false;
+        props.onSuccess(message.results);
         }
         if (message.error) props.setError?.(message.error);
       };
