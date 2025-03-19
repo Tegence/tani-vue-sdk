@@ -7,7 +7,16 @@ import { FaceRecognitionResult } from "../types/FaceRecognitionResult";
 import { AxiosError } from "axios";
 import { TaniAuthTypes } from "../types/TaniAuthTypes";
 
-const props = defineProps<TaniAuthTypes>();
+interface Props {
+  authInstance: { getHeaders: () => Record<string, string> };
+  onSuccess: (data: FaceRecognitionResult) => void;
+}
+
+const props = defineProps<Props>();
+// const props = defineProps({
+//   authInstance: Object,
+//   onSuccess: Function,
+// });
 
 const imageSrc = ref<string | null>(null);
 const imageFile = ref<File | null>(null);
@@ -37,7 +46,7 @@ const identifyUserFace = async () => {
     }
   } catch (err) {
     isLoading.value = false;
-    const axiosError = err as AxiosError<{ detail?: string }>;
+    const axiosError = err as unknown as AxiosError<{ detail?: string }>;
 
     if (axiosError.response) {
       const status = axiosError.response.status;
@@ -84,7 +93,7 @@ const closeCamera = () => {
         ref="webCamRef"
         :setImageFile="(file: File) => (imageFile = file)"
         :setImageSrc="(src: string) => (imageSrc = src)"
-        :imageSrc="imageSrc"
+        :imageSrc="imageSrc ?? undefined"
       />
     </div>
 
@@ -127,5 +136,5 @@ const closeCamera = () => {
 </template>
 
 <style>
-@import '../style.css';
+  @import '../style.css';
 </style>

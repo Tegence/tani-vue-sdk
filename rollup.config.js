@@ -22,10 +22,19 @@ export default [
       },
     ],
     plugins: [
-      vue({ preprocessStyles: true, css: true }), 
+      vue({ 
+        include: /\.vue$/,
+        isProduction: false,
+        preprocessStyles: true,
+      }), 
       resolve({ extensions: [".mjs", ".js", ".ts", ".json", ".vue"] }), 
       commonjs(), 
-      typescript({ tsconfig: './tsconfig.json' }), 
+      typescript({ 
+        tsconfig: './tsconfig.json',
+        sourceMap: false,
+        declaration: true,
+        declarationDir: 'dist/types',
+      }), 
       css()
     ],
     external: ['vue'],

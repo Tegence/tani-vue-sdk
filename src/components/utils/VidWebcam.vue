@@ -54,15 +54,14 @@
   <script setup lang="ts">
     import { ref, watch, computed, onUnmounted, nextTick, defineAsyncComponent } from 'vue';
     import { SquarePlay } from "lucide-vue-next";
-    const CircleProgress = defineAsyncComponent(() => import("vue3-circle-progress"));
 
     const props = defineProps<{ 
-    title?: string;
-    setMessage: (msg: string) => void;
-    setError?: (error: string) => void;
-    setOpenDialog: (open: boolean) => void;
-    setResult: (result: any) => void;
-    onSuccess: (result: any) => void;
+      title?: string;
+      setMessage: (msg: string) => void;
+      setError?: (error: string) => void;
+      setOpenDialog: (open: boolean) => void;
+      setResult: (result: any) => void;
+      onSuccess: (result: any) => void;
     }>();
 
 
@@ -90,15 +89,15 @@
 
     // ✅ Handle WebSocket Connection
     const setupWebSocket = () => {
-    if (socketRef.value) {
-        socketRef.value.close();
-    }
+      if (socketRef.value) {
+          socketRef.value.close();
+      }
 
-    socketRef.value = new WebSocket(
-        'wss://tani-face-model-77573755128.us-central1.run.app/real-time-liveliness-detection'
-    );
+      socketRef.value = new WebSocket(
+          'wss://tani-face-model-77573755128.us-central1.run.app/real-time-liveliness-detection'
+      );
 
-    socketRef.value.onmessage = (event) => {
+      socketRef.value.onmessage = (event) => {
         const message = JSON.parse(event.data);
         if (message.instruction) instructions.value = message.instruction;
         if (message.results) {
@@ -111,19 +110,19 @@
         displayCamera.value = false;
         }
         if (message.error) props.setError?.(message.error);
-    };
+      };
 
-    socketRef.value.onerror = console.error;
+      socketRef.value.onerror = console.error;
     };
 
     // ✅ Handle Webcam
     const setupWebcam = async () => {
-    await nextTick(); // Ensure DOM updates before accessing videoRef
+      await nextTick(); // Ensure DOM updates before accessing videoRef
 
-    const video = videoRef.value;
-    if (!video) return;
+      const video = videoRef.value;
+      if (!video) return;
 
-    navigator.mediaDevices.getUserMedia({ video: true })
+      navigator.mediaDevices.getUserMedia({ video: true })
         .then((stream) => {
         video.srcObject = stream;
         video.onloadedmetadata = () => {
@@ -136,11 +135,19 @@
         alert('Please allow access to your webcam.');
         });
 
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (!context) return;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (!context) return;
 
-    const sendFrame = () => {
+      const waitForWebSocket = (callback: () => void) => {
+        if (socketRef.value?.readyState === WebSocket.OPEN) {
+          callback();
+        } else {
+          setTimeout(() => waitForWebSocket(callback), 100); // Retry in 100ms
+        }
+      };
+
+      const sendFrame = () => {
         if (!videoRef.value?.videoWidth || !videoRef.value?.videoHeight) return;
         
         canvas.width = videoRef.value.videoWidth;
@@ -150,43 +157,37 @@
         const frame = canvas.toDataURL('image/jpeg');
         if (frame === 'data:,') return;
 
-        // ✅ Ensure WebSocket is OPEN before sending
-        if (socketRef.value?.readyState === WebSocket.OPEN) {
-            socketRef.value.send(JSON.stringify({ frame }));
-        } else {
-            console.warn('WebSocket is not open yet. Retrying...');
-            setTimeout(sendFrame, 100); // Retry after 100ms
-            return;
-        }
-
-        setTimeout(sendFrame, 200); // Continue sending every 200ms
-    };
+        waitForWebSocket(() => {
+          socketRef.value?.send(JSON.stringify({ frame }));
+          setTimeout(sendFrame, 200); // Continue sending every 200ms
+        });
+      };
     };
 
     // ✅ Watch displayCamera state
     watch(displayCamera, async (newVal) => {
-    if (newVal) {
-        setupWebSocket();
-        await setupWebcam(); 
-    } else {
-        cleanupCamera();
-    }
+      if (newVal) {
+          setupWebSocket();
+          await setupWebcam(); 
+      } else {
+          cleanupCamera();
+      }
     });
 
     // ✅ Cleanup function
     const cleanupCamera = () => {
-    if (videoRef.value?.srcObject) {
-        (videoRef.value.srcObject as MediaStream)
-        .getTracks()
-        .forEach(track => track.stop());
-    }
-    if (socketRef.value) {
-        socketRef.value.close();
-    }
+      if (videoRef.value?.srcObject) {
+          (videoRef.value.srcObject as MediaStream)
+          .getTracks()
+          .forEach(track => track.stop());
+      }
+      if (socketRef.value) {
+          socketRef.value.close();
+      }
     };
 
     onUnmounted(() => {
-    cleanupCamera();
+      cleanupCamera();
     });
   </script>
   

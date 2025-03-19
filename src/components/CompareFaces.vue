@@ -4,6 +4,7 @@ import WebCamComponent from './utils/Webcam.vue';
 import Dialog from './utils/Dialog.vue';
 import axios from './api/useAxios';
 import { fetchAndProcessImage } from './lib/helpers';
+import '../style.css';
 
 const props = defineProps({
   authInstance: Object,

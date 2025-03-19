@@ -7,12 +7,16 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "isolatedModules": true,
     "declaration": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "src/shims-vue.d.ts"],
   "exclude": ["node_modules", "dist"]

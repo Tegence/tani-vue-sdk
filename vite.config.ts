@@ -1,15 +1,30 @@
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
+import path from "path";
+import copy from "rollup-plugin-copy";
+import esbuild from 'esbuild';
 
 export default defineConfig({
-  plugins: [vue(), dts()],
+  plugins: [
+    vue(),
+    dts(),
+    copy({
+      targets: [
+        { src: "src/tani-vue-sdk.css", dest: "dist", rename: "styles.css" } // ✅ Copies CSS to dist/
+      ],
+      hook: "writeBundle"
+    })
+  ],
+  esbuild: {
+    loader: "ts",
+  },
   build: {
     lib: {
-      entry: "src/index.ts", // ✅ Must exist!
+      entry: "src/index.ts", // ✅ Ensure correct path
       name: "TaniSDK",
-      fileName: (format) => `tani-sdk.${format}.js`,
+      fileName: () => "index.js",
+      formats: ["es"]
     },
     rollupOptions: {
       external: ["vue"], // ✅ Prevent Vue from being bundled
@@ -19,6 +34,8 @@ export default defineConfig({
         },
       },
     },
+    cssCodeSplit: false,
   },
 });
+
 
