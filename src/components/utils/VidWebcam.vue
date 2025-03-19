@@ -87,7 +87,7 @@
     displayCamera.value = false;
     };
 
-    // ✅ Handle WebSocket Connection
+    // Handle WebSocket Connection
     const setupWebSocket = () => {
       if (socketRef.value) {
           socketRef.value.close();
@@ -115,9 +115,9 @@
       socketRef.value.onerror = console.error;
     };
 
-    // ✅ Handle Webcam
+    // Handle Webcam
     const setupWebcam = async () => {
-      await nextTick(); // Ensure DOM updates before accessing videoRef
+      await nextTick(); 
 
       const video = videoRef.value;
       if (!video) return;
@@ -143,7 +143,7 @@
         if (socketRef.value?.readyState === WebSocket.OPEN) {
           callback();
         } else {
-          setTimeout(() => waitForWebSocket(callback), 100); // Retry in 100ms
+          setTimeout(() => waitForWebSocket(callback), 100);
         }
       };
 
@@ -159,12 +159,11 @@
 
         waitForWebSocket(() => {
           socketRef.value?.send(JSON.stringify({ frame }));
-          setTimeout(sendFrame, 200); // Continue sending every 200ms
+          setTimeout(sendFrame, 200); 
         });
       };
     };
 
-    // ✅ Watch displayCamera state
     watch(displayCamera, async (newVal) => {
       if (newVal) {
           setupWebSocket();
@@ -174,7 +173,7 @@
       }
     });
 
-    // ✅ Cleanup function
+
     const cleanupCamera = () => {
       if (videoRef.value?.srcObject) {
           (videoRef.value.srcObject as MediaStream)

@@ -52,7 +52,6 @@ import { ref, onMounted } from 'vue';
 import WebCamComponent from './utils/Webcam.vue';
 import Dialog from './utils/Dialog.vue';
 import axios from './api/useAxios';
-//import { TaniAuthTypes } from "../types/TaniAuthTypes";
 
 export default {
   components: {

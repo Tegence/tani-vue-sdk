@@ -15,7 +15,7 @@ import { X } from "lucide-vue-next";
 
 export default defineComponent({
   components: { X },
-  emits: ['close'], // Define the "close" event
+  emits: ['close'], 
 });
 </script>
 

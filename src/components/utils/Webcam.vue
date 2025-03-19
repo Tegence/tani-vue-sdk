@@ -77,7 +77,7 @@
   
         const openCamera = async () => {
             try {
-                displayCamera.value = true; // Show the camera UI when clicking Open Camera
+                displayCamera.value = true; 
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 if (video.value) {
                     video.value.srcObject = stream;
@@ -108,8 +108,8 @@
             ctx.drawImage(video.value, 0, 0, canvas.width, canvas.height);
 
             const imageData = canvas.toDataURL('image/jpeg');
-            imageSrc.value = imageData;  // Update local `imageSrc` reference
-            props.setImageSrc(imageData); // Update parent component
+            imageSrc.value = imageData;  
+            props.setImageSrc(imageData); 
             props.setImageFile(convertBase64StringToFile(imageData, `captured-${Date.now()}.jpg`));
 
         };
