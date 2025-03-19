@@ -2,19 +2,18 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
 import path from "path";
-import copy from "rollup-plugin-copy";
 import esbuild from 'esbuild';
+import copy from 'rollup-plugin-copy';
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   plugins: [
     vue(),
-    dts(),
     copy({
-      targets: [
-        { src: "src/tani-vue-sdk.css", dest: "dist", rename: "styles.css" } // ✅ Copies CSS to dist/
-      ],
-      hook: "writeBundle"
-    })
+      targets: [{ src: 'src/style.css', dest: 'dist' }]
+    }),
+    dts(),
+    cssInjectedByJsPlugin(),
   ],
   esbuild: {
     loader: "ts",
