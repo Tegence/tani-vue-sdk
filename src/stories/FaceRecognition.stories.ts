@@ -2,7 +2,7 @@ import FaceRecognition from '../components/FaceRecognition.vue';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { TaniAuth } from "../components/controllers/TaniAuth";
 
-const authInstance = new TaniAuth("ykru2gKctIAmpLETxx0buQ", "d2ea1214-22fd-4512-9844-577bdab9ccd5");
+const authInstance = new TaniAuth("", "");
 
 const meta: Meta<typeof FaceRecognition> = {
   title: 'Components/FaceRecognition',

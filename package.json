@@ -1,5 +1,5 @@
 {
-  "name": "tani-vue-sdk",
+  "name": "@tegence/tani-vue-sdk",
   "version": "1.0.0",
   "description": "Tani Web SDK for Vue",
   "type": "module",
@@ -20,9 +20,6 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.3",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-typescript": "^12.1.2",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addons": "^7.6.17",
     "@storybook/vue3-vite": "^8.6.4",
@@ -32,22 +29,17 @@
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.1",
     "postcss": "^8.5.3",
-    "rollup": "^4.35.0",
-    "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-dts": "^6.1.1",
-    "rollup-plugin-import-css": "^3.5.8",
-    "rollup-plugin-vue": "^6.0.0",
     "storybook": "^8.6.4",
     "tslib": "^2.6.2",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.3",
     "vue": "^3.5.13",
-    "vue-tsc": "^2.2.4"
+    "vue-tsc": "^2.2.4",
+    "vite-plugin-css-injected-by-js": "^3.5.2"
   },
   "files": [
-    "dist",
-    "dist/tani-vue-sdk.css"
+    "dist"
   ],
   "peerDependencies": {
     "vue": "^3.5.13"
@@ -58,7 +50,6 @@
     "browser-image-compression": "^2.0.2",
     "lucide-vue-next": "^0.482.0",
     "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.1",
-    "vite-plugin-css-injected-by-js": "^3.5.2"
+    "tailwindcss": "^3.4.1"
   }
 }

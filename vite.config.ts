@@ -3,15 +3,11 @@ import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
 import path from "path";
 import esbuild from 'esbuild';
-import copy from 'rollup-plugin-copy';
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   plugins: [
     vue(),
-    copy({
-      targets: [{ src: 'src/style.css', dest: 'dist' }]
-    }),
     dts(),
     cssInjectedByJsPlugin(),
   ],
