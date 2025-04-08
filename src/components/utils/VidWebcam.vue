@@ -48,12 +48,22 @@
           </button>
         </div>
       </div>
+      <div class='flex items-center justify-center gap-2 w-full pt-3'>
+        <p class='font-normal text-[#757575] text-sm'>Powered by </p>
+        <img
+          :src="vector"
+          alt='Tani icon'
+          :width="42.9"
+          :height="14"
+        />
+      </div>
     </div>
   </template>
   
   <script setup lang="ts">
     import { ref, watch, computed, onUnmounted, nextTick, defineAsyncComponent } from 'vue';
     import { SquarePlay } from "lucide-vue-next";
+    import vector from '../../assets/tani_vector.svg'
 
     const props = defineProps<{ 
       title?: string;

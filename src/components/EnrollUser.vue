@@ -82,6 +82,7 @@ export default {
     };
 
     const createPersonWithImage = async () => {
+      if (inputName.value === '' && !imageFile.value) return;
       isLoading.value = true;
       openDialog.value = true;
       try {

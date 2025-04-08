@@ -52,6 +52,15 @@
           </div>
         </div>
       </template>
+      <div class='flex items-center justify-center gap-2 w-full pt-2'>
+        <p class='font-normal text-[#757575] text-sm'>Powered by </p>
+        <img
+          :src="tani_vector"
+          alt='Tani icon'
+          :width="42.9"
+          :height="14"
+        />
+      </div>
     </div>
   </template>
   
@@ -59,6 +68,7 @@
   import { ref, defineComponent, onBeforeUnmount } from 'vue';
   import { Camera as CameraIcon, CloudUpload as CloudUploadIcon } from 'lucide-vue-next';
   import { convertBase64StringToFile, handleImageCompression } from '../lib/helpers';
+  import tani_vector from '../../assets/tani_vector.svg'
   
   export default defineComponent({
     components: { CameraIcon, CloudUploadIcon },
@@ -158,7 +168,7 @@
 
       expose({ closeCamera });
   
-      return { displayCamera, video, captureImage, openCamera, closeCamera, openFileDialog, handleFileInputChange, fileInput, imageSrc };
+      return { displayCamera, video, captureImage, openCamera, closeCamera, openFileDialog, handleFileInputChange, fileInput, imageSrc, tani_vector };
     },
   });
   </script>

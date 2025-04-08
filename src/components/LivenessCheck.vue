@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import VidWebCam from './utils/VidWebcam.vue';
 import Dialog from './utils/Dialog.vue';
+import { Check } from "lucide-vue-next";
 import '../style.css';
 
 const props = defineProps({
@@ -19,7 +20,7 @@ const closeDialog = () => {
 
 <template>
   <main class="flex w-full flex-col p-8 relative">
-    <h1 class="font-bold text-xl">Liveness Check</h1>
+    <h1 class="font-bold text-4xl text-center">Liveness Check</h1>
     <div class="flex-1">
       <VidWebCam
         title="Start liveness check"
@@ -35,27 +36,43 @@ const closeDialog = () => {
         <div v-if="message" class="relative flex h-52 w-full px-6 flex-col items-center justify-center rounded-md bg-white">
           <h5 class="mb-2 text-center">{{ message }}</h5>
           <div>
-            <div>
+            <div class="flex items-center gap-1">
               <span>
-                <input type="radio" :checked="result?.blink_detected" readonly />
+                <Check 
+                  :stroke-width="3" 
+                  :size="18" 
+                  :class="['font-bold', result?.blink_detected ? 'text-[#64C155]' : 'text-[#F2F4F7]']" 
+                />
               </span>
               <span> Eyes Blink </span>
             </div>
-            <div>
+            <div class="flex items-center gap-1">
               <span>
-                <input type="radio" :checked="result?.mouth_open_detected" readonly />
+                <Check 
+                  :stroke-width="3" 
+                  :size="18" 
+                  :class="['font-bold', result?.mouth_open_detected ? 'text-[#64C155]' : 'text-[#F2F4F7]']" 
+                />
               </span>
               <span> Mouth Open </span>
             </div>
-            <div>
+            <div class="flex items-center gap-1">
               <span>
-                <input type="radio" :checked="result?.head_movement_detected" readonly />
+                <Check 
+                  :stroke-width="3" 
+                  :size="18" 
+                  :class="['font-bold', result?.head_movement_detected ? 'text-[#64C155]' : 'text-[#F2F4F7]']" 
+                />
               </span>
               <span> Head Movement </span>
             </div>
-            <div>
+            <div class="flex items-center gap-1">
               <span>
-                <input type="radio" :checked="result?.is_live" readonly />
+                <Check 
+                  :stroke-width="3" 
+                  :size="18" 
+                  :class="['font-bold', result?.is_live ? 'text-[#64C155]' : 'text-[#F2F4F7]']" 
+                />
               </span>
               <span> Live </span>
             </div>
